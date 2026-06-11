@@ -1,0 +1,58 @@
+﻿<!-- manage_employees.html -->
+
+
+{% block content %}
+<h1>Manage Employees</h1>
+
+<form method="POST">
+    <h2>Add Employee</h2>
+    <input type="hidden" name="action" value="add">
+    <label for="first_name">First Name</label>
+    <input type="text" id="first_name" name="first_name" required>
+    <label for="phonenumber">Phone Number</label>
+    <input type="text" id="phonenumber" name="phonenumber" required>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit">Add Employee</button>
+</form>
+
+<h2>Existing Employees</h2>
+<ul>
+    {% for user in users %}
+    <li>
+        {{ user.first_name }} - {{ user.phonenumber }}
+        <form method="POST" style="display:inline;">
+            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="user_id" value="{{ user.id }}">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" required>
+            <label for="phonenumber">Phone Number</label>
+            <input type="text" id="phonenumber" name="phonenumber" value="{{ user.phonenumber }}" required>
+            <label for="password">Password (leave blank to keep current)</label>
+            <input type="password" id="password" name="password">
+            <button type="submit">Update</button>
+        </form>
+        <form method="POST" style="display:inline;">
+            <input type="hidden" name="action" value="delete">
+            <input type="hidden" name="user_id" value="{{ user.id }}">
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+  {% if client %}
+<h2>Client Name: {{ client.name }}</h2>
+<h2>Total Points: {{ total_points }}</h2>
+  {% endif %}
+<a href="{{ url_for('views.home') }}">Back to Home</a>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+<ul>
+    {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+    {% endif %}
+  {% endwith %}

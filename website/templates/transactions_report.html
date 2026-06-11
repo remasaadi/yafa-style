@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transactions Report</title>
+</head>
+<body>
+    <h1>Transactions Report</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul>
+        {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('views.transactions_report') }}">
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" required>
+        <button type="submit">View Report</button>
+    </form>
+
+    {% if transactions %}
+    <table border="1">
+        <tr>
+            <th>Transaction ID</th>
+            <th>Client Name</th>
+            <th>Client Phone</th>
+            <th>Original Amount</th>
+            <th>Points Used</th>
+            <th>Final Amount</th>
+            <th>Points Earned</th>
+            <th>Employee Name</th>
+            <th>Transaction Date</th>
+        </tr>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction.id }}</td>
+            <td>{{ transaction.client.name }}</td>
+            <td>{{ transaction.client.phone }}</td>
+            <td>{{ transaction.original_amount }}</td>
+            <td>{{ transaction.points_used }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.points_earned }}</td>
+            <td>{{ transaction.employee_name }}</td>
+            <td>{{ transaction.date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No transactions found for the selected date.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('views.home') }}">Back to Home</a>
+</body>
+</html>

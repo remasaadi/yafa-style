@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Use Points</title>
+</head>
+<body>
+    <h1>Use Points</h1>
+    <form method="POST">
+        <label for="clientPhone">Client Phone:</label>
+        <input type="text" name="clientPhone" required>
+        <label for="points">Points to Use:</label>
+        <input type="text" name="points" required>
+        <button type="submit">Use Points</button>
+    </form>
+    <a href="{{ url_for('views.home') }}">Back to Home</a>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Application</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('views.home') }}">Home</a></li>
+            <li><a href="{{ url_for('views.add_client') }}">Add Client</a></li>
+            <li><a href="{{ url_for('views.add_transaction') }}">Add Transaction</a></li>
+            <li><a href="{{ url_for('views.use_points') }}">Use Points</a></li>
+            <li><a href="{{ url_for('views.check_points') }}">Check Points</a></li>
+            {% if current_user.is_admin %}
+            <li><a href="{{ url_for('views.manage_employees') }}">Manage Employees</a></li>
+            <li><a href="{{ url_for('views.transactions_report') }}">Transactions Report</a></li>
+            <li><a href="{{ url_for('auth.update_password') }}">Update Password</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

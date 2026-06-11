@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Add Transaction</h1>
+
+<form method="POST">
+    <label for="clientPhone">Client Phone Number</label>
+    <input type="text" id="clientPhone" name="clientPhone" required>
+
+    <label for="amount">Transaction Amount</label>
+    <input type="text" id="amount" name="amount" required>
+
+    <label for="pointsToUse">Points to Use</label>
+    <input type="text" id="pointsToUse" name="pointsToUse">
+
+    <button type="submit" name="check_points">Check Points</button>
+    <button type="submit" name="cancel_transaction">Cancel Transaction</button>
+    <button type="submit">Add Transaction</button>
+</form>
+
+{% if client %}
+<p>Client: {{ client.name }}</p>
+<p>Total Points: {{ total_points }}</p>
+{% endif %}
+
+{% if new_transaction %}
+<p>Transaction added successfully!</p>
+<p>Client Name: {{ client.name }}</p>
+<p>Client Phone: {{ client.phone }}</p>
+<p>Original Amount: {{ original_amount }}</p>
+<p>Amount After Points: {{ final_amount }}</p>
+<p>Points Earned: {{ points_earned }}</p>
+<p>Total Points After Transaction: {{ total_points_after }}</p>
+<p>Employee Name: {{ current_user.first_name }}</p>
+<p>Transaction Date: {{ new_transaction.date }}</p>
+{% endif %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+   {% if messages %}
+<ul>
+    {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+   {% endif %}
+{% endwith %}
+{% endblock %}

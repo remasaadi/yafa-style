@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Client</title>
+</head>
+<body>
+    <h1>Add Client</h1>
+    <form method="POST">
+        <label for="clientName">Client Name:</label>
+        <input type="text" name="clientName" required>
+        <label for="clientPhone">Client Phone:</label>
+        <input type="text" name="clientPhone" required>
+        <button type="submit">Add Client</button>
+    </form>
+    <a href="{{ url_for('views.home') }}">Back to Home</a>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>

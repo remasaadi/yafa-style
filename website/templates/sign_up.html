@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% block title %}יאפא בגדים{% endblock %} {% block
+content %}
+<form method="POST">
+    <h3 align="center">הרשמה ליאפא בגדים</h3>
+    <div class="form-group">
+        <label for="phonenumber">מספר טלפון</label>
+        <input type="phonenumber"
+               class="form-control"
+               id="phonenumber"
+               name="phonenumber"
+               placeholder="הכנס מספר טלפון" />
+    </div>
+    <div class="form-group">
+        <label for="firstName">שם</label>
+        <input type="text"
+               class="form-control"
+               id="firstName"
+               name="firstName"
+               placeholder="הכנס שם" />
+    </div>
+    <div class="form-group">
+        <label for="password1">סיסמה</label>
+        <input type="password"
+               class="form-control"
+               id="password1"
+               name="password1"
+               placeholder="הכנס סיסמה" />
+    </div>
+    <div class="form-group">
+        <label for="password2">סיסמה (אימות)</label>
+        <input type="password"
+               class="form-control"
+               id="password2"
+               name="password2"
+               placeholder="הכנס את הסיסמה שוב" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">שלח</button>
+</form>
+{% endblock %}
+  {% if client %}
+<h2>Client Name: {{ client.name }}</h2>
+<h2>Total Points: {{ total_points }}</h2>
+  {% endif %}
+<a href="{{ url_for('views.home') }}">Back to Home</a>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+<ul>
+    {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+</ul>
+    {% endif %}
+  {% endwith %}

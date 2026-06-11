@@ -1,0 +1,24 @@
+﻿<!-- website/templates/user_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <br>
+    <h1>Welcome, {{ user.first_name }}!</h1>
+    <br>
+    <br>
+    <a href="{{ url_for('views.add_client') }}">Add Client</a>
+    <br>
+    <br>
+    <a href="{{ url_for('views.add_transaction') }}">Add Transaction</a>
+    <br>
+    <br>
+    <a href="{{ url_for('views.check_points') }}">Check Points</a>
+    <br>
+    <br>
+    <a href="{{ url_for('views.logout') }}">Logout</a>
+</body>
+</html>
